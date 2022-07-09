@@ -1,0 +1,7 @@
+node_modules/
+logs/
+src/**/test/
+src/**/repository/
+
+.env
+.prettierignore
