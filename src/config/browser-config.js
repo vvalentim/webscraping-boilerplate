@@ -1,3 +1,5 @@
+const DEFAULT_UA = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.0.0 Safari/537.36";
+
 /* Puppeteer browser configuration. */
 export default {
   headless: true,
@@ -10,7 +12,7 @@ export default {
     "--disable-gpu",
     "--disable-dev-shm-usage",
     "--disable-features=IsolateOrigins,site-per-process",
-    `--user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.0.0 Safari/537.36`,
+    `--user-agent=${process.env.PUPPETEER_USERAGENT || DEFAULT_UA}`,
   ],
   ignoreHTTPSErrors: true,
 };

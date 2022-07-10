@@ -44,7 +44,7 @@ const scraperDefault = (name, dir, search, launchConfig = null) => {
   /* Runs when the scraper starts. */
   const start = async function () {
     if (browserInstance == null) {
-      browserInstance = await puppeteer.launch(launchConfig ? launchConfig : browserConfig);
+      browserInstance = await puppeteer.launch(launchConfig || browserConfig);
     }
   };
 
@@ -78,7 +78,7 @@ const scraperDefault = (name, dir, search, launchConfig = null) => {
 
     if (file) {
       const filepath = path.resolve(
-        `${path_repository}`,
+        path_repository,
         moment(new Date()).format("YYYY/MM/DD"),
         file.extension,
         `${id}.${file.extension}`
@@ -120,10 +120,10 @@ const scraperDefault = (name, dir, search, launchConfig = null) => {
     }
 
     const filepath = path.resolve(
-      `${path_repository}`,
+      path_repository,
       moment(new Date()).format("YYYY/MM/DD"),
       "csv",
-      `${filename ? filename : this.name}.csv`
+      `${filename || this.name}.csv`
     );
 
     await writeToFile(filepath, content);

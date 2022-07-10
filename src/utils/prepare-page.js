@@ -32,7 +32,7 @@ const preparePermissions = async (page) => {
 const preparePlugin = async (page, opts) => {
   await page.evaluateOnNewDocument(() => {
     Object.defineProperty(navigator, "plugins", {
-      get: () => (opts.plugins ? opts.plugins : [1, 2, 3, 4, 5]),
+      get: () => opts.plugins || [1, 2, 3, 4, 5],
     });
   });
 };
@@ -42,16 +42,16 @@ const prepareLang = async (page, opts) => {
   const defaultBrowserLang = ["en-US", "en"];
 
   await page.setExtraHTTPHeaders({
-    "Accept-Language": opts.acceptLanguage ? opts.languages : defaultLangHeaders,
+    "Accept-Language": opts.languages || defaultLangHeaders,
   });
 
   await page.evaluateOnNewDocument(() => {
     Object.defineProperty(navigator, "language", {
-      get: () => (opts.browserLanguages ? opts.browserLanguages : defaultBrowserLang),
+      get: () => opts.browserLanguages || defaultBrowserLang,
     });
 
     Object.defineProperty(navigator, "languages", {
-      get: () => (opts.browserLanguages ? opts.browserLanguages : defaultBrowserLang),
+      get: () => opts.browserLanguages || defaultBrowserLang,
     });
   });
 };
